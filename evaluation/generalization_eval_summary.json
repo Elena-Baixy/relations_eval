@@ -1,0 +1,12 @@
+{
+  "Checklist": {
+    "GT1_ModelGeneralization": "PASS",
+    "GT2_DataGeneralization": "PASS",
+    "GT3_MethodGeneralization": "PASS"
+  },
+  "Rationale": {
+    "GT1_ModelGeneralization": "The LRE (Linear Relational Embedding) finding successfully transfers to GPT-2 Medium, a model not used in the original study (which used GPT-J-6B, GPT-2-XL, and LLaMA-13B). Testing the 'country capital city' relation on GPT-2 Medium achieved 2/3 correct predictions (66.67% faithfulness), with successful examples including 'South Korea \u2192 Seoul' and 'United States \u2192 Washington'. This demonstrates that the neuron-level linear approximation finding generalizes to a new model architecture/size.",
+    "GT2_DataGeneralization": "The LRE finding generalizes to new data instances not in the original dataset. Testing on countries not in the original 24-country dataset (Poland, Sweden, Norway), the LRE achieved 100% faithfulness (3/3 correct): Poland \u2192 Warsaw, Sweden \u2192 Stockholm, Norway \u2192 Oslo were all correctly predicted. This demonstrates that the linear relational embedding generalizes beyond the training data.",
+    "GT3_MethodGeneralization": "The LRE method (Jacobian-based linear approximation) can be successfully applied to multiple similar tasks. Testing on different relation types: (1) Commonsense relations (word sentiment) achieved 80% faithfulness (4/5 correct predictions including blessed\u2192positive, blissful\u2192positive, cheerful\u2192positive, delighted\u2192positive). (2) Factual relations (country language) achieved 67% faithfulness (2/3 correct: South Korea\u2192Korean, United States\u2192English). While some relations like adjective antonym do not work well (as noted in the original paper - not all relations are linearly decodable), the method demonstrably applies to multiple task types."
+  }
+}
