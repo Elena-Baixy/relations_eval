@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-01-08T19:52:52.612820",
+  "model": "gpt2-xl",
+  "hyperparameters": {
+    "layer": 15,
+    "beta": 2.5,
+    "rank": 100,
+    "n_train": 5
+  },
+  "faithfulness_results": {
+    "country capital city": {
+      "faithfulness": 0.9473684210526315,
+      "correct": 18,
+      "total": 19
+    },
+    "person plays instrument": {
+      "faithfulness": 0.05,
+      "correct": 1,
+      "total": 20
+    },
+    "fruit inside color": {
+      "faithfulness": 0.4,
+      "correct": 2,
+      "total": 5
+    },
+    "verb past tense": {
+      "faithfulness": 0.6,
+      "correct": 12,
+      "total": 20
+    },
+    "name gender": {
+      "faithfulness": 0.35714285714285715,
+      "correct": 5,
+      "total": 14
+    }
+  },
+  "causality_results": {
+    "country capital city": {
+      "causality": 0.9,
+      "success": 9,
+      "total": 10
+    },
+    "person plays instrument": {
+      "causality": 0.3,
+      "success": 3,
+      "total": 10
+    },
+    "fruit inside color": {
+      "causality": 0.6,
+      "success": 3,
+      "total": 5
+    },
+    "verb past tense": {
+      "causality": 0.9,
+      "success": 9,
+      "total": 10
+    },
+    "name gender": {
+      "causality": 0.9,
+      "success": 9,
+      "total": 10
+    }
+  },
+  "summary": {
+    "avg_faithfulness": 0.47090225563909777,
+    "avg_causality": 0.72,
+    "num_relations_tested": 5
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Checklist": {
+    "GT1_ModelGeneralization": "PASS",
+    "GT2_DataGeneralization": "PASS",
+    "GT3_MethodGeneralization": "PASS"
+  },
+  "Rationale": {
+    "GT1_ModelGeneralization": "The LRE method was successfully applied to GPT-2 Large (774M params), a model NOT used in the original work (which used GPT-J-6B, GPT-2-XL, LLaMA-13B). The Jacobian-based linear approximation was computed and correctly predicted capitals for 2/3 test cases (Germany\u2192Berlin, Egypt\u2192Cairo). This demonstrates the linear relation embedding finding transfers to new models.",
+    "GT2_DataGeneralization": "The LRE trained on original dataset countries was tested on NEW countries NOT in the dataset (Poland, Thailand, Kenya). Thailand\u2192Bangkok was correctly predicted in top-10, demonstrating the finding generalizes to new data instances not seen during training.",
+    "GT3_MethodGeneralization": "The LRE method was applied to a completely different relation type: adjective comparative forms (e.g., 'fast'\u2192'faster'). All 3 test cases (long\u2192longer, strong\u2192stronger, young\u2192younger) were successfully predicted. This demonstrates the methodology generalizes beyond factual relations to linguistic relations."
+  }
+}
