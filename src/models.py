@@ -360,8 +360,7 @@ def load_model(
     kwargs: dict = dict(torch_dtype=torch_dtype)
     if is_gpt_j_variant:
         kwargs["low_cpu_mem_usage"] = True
-        if fp16:
-            kwargs["revision"] = "float16"
+        kwargs["device_map"] = "auto"
 
     # If model is not automatically downloadable from huggingface, assume it is
     # available locally in the project models directory.
@@ -376,8 +375,9 @@ def load_model(
     logger.info(f"loading {name} (device={device}, fp16={fp16})")
 
     model = transformers.AutoModelForCausalLM.from_pretrained(name, **kwargs)
-    model.to(torch_dtype)
-    model.to(device)
+    if "device_map" not in kwargs:
+        model.to(torch_dtype)
+        model.to(device)
     model.eval()
 
     if is_llama_variant:
