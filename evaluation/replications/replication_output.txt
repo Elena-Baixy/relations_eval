@@ -1,0 +1,140 @@
+Using device: cuda:0
+CUDA available: True
+GPU: NVIDIA H100 NVL
+
+======================================================================
+REPLICATION: Linearity of Relation Decoding in Transformer LMs
+======================================================================
+/home/smallyan/.local/lib/python3.12/site-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+
+[1/7] Loading GPT-J model...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Some weights of the model checkpoint at EleutherAI/gpt-j-6B were not used when initializing GPTJForCausalLM: ['transformer.h.0.attn.bias', 'transformer.h.0.attn.masked_bias', 'transformer.h.1.attn.bias', 'transformer.h.1.attn.masked_bias', 'transformer.h.10.attn.bias', 'transformer.h.10.attn.masked_bias', 'transformer.h.11.attn.bias', 'transformer.h.11.attn.masked_bias', 'transformer.h.12.attn.bias', 'transformer.h.12.attn.masked_bias', 'transformer.h.13.attn.bias', 'transformer.h.13.attn.masked_bias', 'transformer.h.14.attn.bias', 'transformer.h.14.attn.masked_bias', 'transformer.h.15.attn.bias', 'transformer.h.15.attn.masked_bias', 'transformer.h.16.attn.bias', 'transformer.h.16.attn.masked_bias', 'transformer.h.17.attn.bias', 'transformer.h.17.attn.masked_bias', 'transformer.h.18.attn.bias', 'transformer.h.18.attn.masked_bias', 'transformer.h.19.attn.bias', 'transformer.h.19.attn.masked_bias', 'transformer.h.2.attn.bias', 'transformer.h.2.attn.masked_bias', 'transformer.h.20.attn.bias', 'transformer.h.20.attn.masked_bias', 'transformer.h.21.attn.bias', 'transformer.h.21.attn.masked_bias', 'transformer.h.22.attn.bias', 'transformer.h.22.attn.masked_bias', 'transformer.h.23.attn.bias', 'transformer.h.23.attn.masked_bias', 'transformer.h.24.attn.bias', 'transformer.h.24.attn.masked_bias', 'transformer.h.25.attn.bias', 'transformer.h.25.attn.masked_bias', 'transformer.h.26.attn.bias', 'transformer.h.26.attn.masked_bias', 'transformer.h.27.attn.bias', 'transformer.h.27.attn.masked_bias', 'transformer.h.3.attn.bias', 'transformer.h.3.attn.masked_bias', 'transformer.h.4.attn.bias', 'transformer.h.4.attn.masked_bias', 'transformer.h.5.attn.bias', 'transformer.h.5.attn.masked_bias', 'transformer.h.6.attn.bias', 'transformer.h.6.attn.masked_bias', 'transformer.h.7.attn.bias', 'transformer.h.7.attn.masked_bias', 'transformer.h.8.attn.bias', 'transformer.h.8.attn.masked_bias', 'transformer.h.9.attn.bias', 'transformer.h.9.attn.masked_bias']
+- This IS expected if you are initializing GPTJForCausalLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing GPTJForCausalLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Model dtype: torch.float16
+Model device: cuda:0
+Memory: 12.10 GB
+
+[2/7] Loading dataset...
+Loaded 47 relations
+
+Selected relation: country capital city
+Number of samples: 24
+Prompt template: The capital city of {} is
+
+[3/7] Splitting data...
+Training samples (5):
+  China -> Beijing
+  Japan -> Tokyo
+  Italy -> Rome
+  Brazil -> Bras\u00edlia
+  Turkey -> Ankara
+
+Test samples (19):
+  South Korea -> Seoul
+  Colombia -> Bogot\u00e1
+  Saudi Arabia -> Riyadh
+  France -> Paris
+  Mexico -> Mexico City
+  ... and 14 more
+
+[4/7] Estimating LRE operator...
+Hyperparameters: h_layer=5, beta=2.5, rank=100
+relation has > 1 prompt_templates, will use first (The capital city of {} is)
+LRE estimated using prompt template: <|endoftext|>The capital city of China is Beijing
+...
+Weight matrix shape: torch.Size([4096, 4096])
+Bias shape: torch.Size([1, 4096])
+
+[5/7] Filtering test samples...
+Filtered test samples: 19 (from 19)
+
+[6/7] Evaluating faithfulness...
+----------------------------------------------------------------------
+[X] Argentina -> Buenos Aires, predicted: '\n' (p=0.250)
+[X] Australia -> Canberra, predicted: ' ...' (p=0.171)
+[X] Canada -> Ottawa, predicted: ' ...' (p=0.123)
+[X] Chile -> Santiago, predicted: '\n' (p=0.307)
+[X] Colombia -> Bogot\u00e1, predicted: '\n' (p=0.315)
+[X] Egypt -> Cairo, predicted: '\n' (p=0.226)
+[Y] France -> Paris, predicted: ' Paris' (p=0.841)
+[Y] Germany -> Berlin, predicted: ' Berlin' (p=0.392)
+[Y] India -> New Delhi, predicted: ' New' (p=0.136)
+[X] Mexico -> Mexico City, predicted: ' ...' (p=0.184)
+[X] Nigeria -> Abuja, predicted: '\n' (p=0.289)
+[X] Pakistan -> Islamabad, predicted: '\n' (p=0.168)
+[X] Peru -> Lima, predicted: '\n' (p=0.355)
+[Y] Russia -> Moscow, predicted: ' Moscow' (p=0.597)
+[X] Saudi Arabia -> Riyadh, predicted: ' ' (p=0.216)
+[X] South Korea -> Seoul, predicted: '\n' (p=0.205)
+[X] Spain -> Madrid, predicted: ' ...' (p=0.146)
+[Y] United States -> Washington D.C., predicted: ' Washington' (p=0.172)
+[X] Venezuela -> Caracas, predicted: '\n' (p=0.263)
+----------------------------------------------------------------------
+Faithfulness: 26.32% (5/19)
+
+[7/7] Evaluating causality...
+Generated 19 edit targets
+----------------------------------------------------------------------
+[Y] Argentina -> Riyadh, predicted: ' Riyadh' (p=0.739)
+[Y] Australia -> Buenos Aires, predicted: ' Buenos' (p=0.899)
+[Y] Canada -> Abuja, predicted: ' Abu' (p=0.693)
+[Y] Chile -> Lima, predicted: ' Lima' (p=0.766)
+[Y] Colombia -> Berlin, predicted: ' Berlin' (p=0.970)
+[Y] Egypt -> Mexico City, predicted: ' Mexico' (p=0.975)
+[Y] France -> Riyadh, predicted: ' Riyadh' (p=0.753)
+[Y] Germany -> Cairo, predicted: ' Cairo' (p=0.948)
+[Y] India -> Lima, predicted: ' Lima' (p=0.645)
+[Y] Mexico -> Santiago, predicted: ' Santiago' (p=0.848)
+[Y] Nigeria -> Riyadh, predicted: ' Riyadh' (p=0.738)
+[Y] Pakistan -> New Delhi, predicted: ' New' (p=0.744)
+[Y] Peru -> Caracas, predicted: ' Car' (p=0.274)
+[Y] Russia -> Cairo, predicted: ' Cairo' (p=0.966)
+[Y] Saudi Arabia -> Caracas, predicted: ' Car' (p=0.670)
+[Y] South Korea -> Cairo, predicted: ' Cairo' (p=0.914)
+[Y] Spain -> Islamabad, predicted: ' Islamabad' (p=0.887)
+[Y] United States -> Ottawa, predicted: ' Ottawa' (p=0.781)
+[Y] Venezuela -> Madrid, predicted: ' Madrid' (p=0.958)
+----------------------------------------------------------------------
+Causality: 100.00% (19/19)
+
+======================================================================
+REPLICATION RESULTS SUMMARY
+======================================================================
+
+Relation: country capital city
+Model: GPT-J-6B
+
+Hyperparameters:
+  h_layer: 5
+  beta: 2.5
+  rank (for causality): 100
+
+Data Split:
+  Training samples: 5
+  Test samples (filtered): 19
+
+Results:
+  Faithfulness: 26.32%
+  Causality: 100.00%
+
+Original Demo Reference:
+  Faithfulness: ~78.9%
+  Causality: ~100%
+
+Comparison:
+  Faithfulness difference from demo: 52.6%
+  Causality difference from demo: 0.0%
+
+Replication Status:
+  Faithfulness in expected range (within 20%): FAIL
+  Causality in expected range (>=80%): PASS
+  Overall: PARTIAL/NEEDS REVIEW
+
+Results saved to: /net/scratch2/smallyan/relations_eval/evaluation/replications/replication_results.json
+
+======================================================================
+REPLICATION COMPLETE
+======================================================================
