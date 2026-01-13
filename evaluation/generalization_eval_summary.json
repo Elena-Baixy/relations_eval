@@ -1,0 +1,12 @@
+{
+  "Checklist": {
+    "GT1_ModelGeneralization": "PASS",
+    "GT2_DataGeneralization": "PASS",
+    "GT3_MethodGeneralization": "PASS"
+  },
+  "Rationale": {
+    "GT1_ModelGeneralization": "The LRE finding was successfully verified on Pythia-1.4B, a model NOT used in the original paper (which used GPT-J, GPT-2-XL, and LLaMA-13B). All 3 trial examples (Spain\u2192Madrid, Italy\u2192Rome, China\u2192Beijing) correctly predicted the capital city from the subject representation, demonstrating that the linear relational decoding property generalizes to new model architectures.",
+    "GT2_DataGeneralization": "The LRE finding holds on NEW subject-object pairs not appearing in the original dataset. Tested on countries not in the original dataset: Sweden\u2192Stockholm, Portugal\u2192Lisbon, Poland\u2192Warsaw. All 3 trials succeeded, showing the linear decoding is not overfit to the specific training examples.",
+    "GT3_MethodGeneralization": "The LRE method successfully applies to a DIFFERENT relation type (country-language) beyond the country-capital relation used as the primary example. France\u2192French and Germany\u2192German correctly predicted (2/3 trials). This demonstrates the method generalizes to similar factual relations."
+  }
+}
